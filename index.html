@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SarthiCodes - Flutter, Python, PC Software, and Websites</title>
+    
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet Map Dependencies -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        /* Custom styles for Inter font and a smooth scroll effect */
+        @import url('https://fonts.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f7f9fc; /* Very light subtle background */
+        }
+        /* Custom shadow for cards */
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s;
+        }
+        .card-shadow:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Gradient for service cards as per the image */
+        .service-card-gradient {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFA07A 100%); /* Orange-Red gradient */
+            color: white; /* Ensure text is readable */
+        }
+        .service-card-gradient h4 {
+            color: white;
+        }
+        .service-card-gradient p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        /* Style for the Leaflet map container */
+        #leaflet-map {
+            height: 100%; /* Important for the map to display inside the h-96 container */
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header & Navigation --><header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Org Name --><h1 class="text-3xl font-extrabold text-blue-600 tracking-tight">Sarthi<span class="text-gray-900">Codes</span></h1>
+            <!-- Simple Navigation Links --><nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#about" class="hover:text-blue-600 transition duration-150">About</a>
+                <a href="#services" class="hover:text-blue-600 transition duration-150">Services</a>
+                <a href="#work" class="hover:text-blue-600 transition duration-150">Our Work</a>
+                <a href="#contact" class="hover:text-blue-600 transition duration-150">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container --><main>
+        <!-- Hero Section --><section id="about" class="py-20 md:py-32 bg-gradient-to-r from-blue-50 to-indigo-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-sm font-semibold uppercase text-blue-500 mb-2">Code that works, design that inspires</p>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                    Building the Future with <span class="text-blue-600">Flutter</span> & <span class="text-green-600">Python</span>
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto text-gray-600 mb-10">
+                    At SarthiCodes, we specialize in crafting high-performance, beautiful mobile applications with Flutter, robust PC software solutions with Python, and custom, responsive websites.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#work" class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl card-shadow hover:bg-blue-700 transition duration-300">
+                        View Our Work
+                    </a>
+                    <a href="#contact" class="bg-white text-blue-600 font-semibold border-2 border-blue-600 px-8 py-3 rounded-xl card-shadow hover:bg-gray-50 transition duration-300">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section --><section id="services" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-extrabold mb-4 text-gray-900">My Best Services</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1: Web Development --><div class="service-card-gradient p-8 rounded-2xl card-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2">Web Development</h4>
+                        <p class="text-gray-100">Build custom, responsive websites tailored to your needs, ensuring both functionality and great user experience.</p>
+                    </div>
+
+                    <!-- Service Card 2: Custom Android Apps (now Flutter focused) --><div class="service-card-gradient p-8 rounded-2xl card-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2">Custom Flutter Mobile Apps</h4>
+                        <p class="text-gray-100">Develop cross-platform mobile applications using Flutter, providing efficient and lightweight solutions for iOS and Android.</p>
+                    </div>
+
+                    <!-- Service Card 3: Automation Solutions (Python focus) --><div class="service-card-gradient p-8 rounded-2xl card-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2">Automation Solutions (Python)</h4>
+                        <p class="text-gray-100">Automate repetitive tasks and improve efficiency, whether it's data processing, web scraping, or file management using Python.</p>
+                    </div>
+
+                    <!-- Service Card 4: E-commerce Websites --><div class="service-card-gradient p-8 rounded-2xl card-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2">E-commerce Websites</h4>
+                        <p class="text-gray-100">Create feature-rich e-commerce platforms with payment integration, inventory management, and more.</p>
+                    </div>
+
+                    <!-- Service Card 5: Data Visualization and Reporting (Python focus) --><div class="service-card-gradient p-8 rounded-2xl card-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 12l3-3 3 3 4-4M18 21V3a2 2 0 00-2-2H8a2 2 0 00-2 2v18l-2-2" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2">Data Visualization & Reporting (Python)</h4>
+                        <p class="text-gray-100">Create interactive dashboards and reports, turning raw data into actionable insights using Python for data visualization.</p>
+                    </div>
+
+                    <!-- Service Card 6: API Development and Integration (Python focus) --><div class="service-card-gradient p-8 rounded-2xl card-shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3m0 0l3-3m-3 3v4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2">API Development & Integration (Python)</h4>
+                        <p class="text-gray-100">Develop and integrate APIs to connect your website or application with third-party services, ensuring seamless interaction between different systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Work Section (Combined Apps, Software, Websites) --><section id="work" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-extrabold mb-4 text-blue-700">Our Latest Projects</h3>
+                    <p class="text-lg text-gray-500">Showcasing our diverse portfolio across mobile, desktop, and web platforms.</p>
+                </div>
+
+                <!-- Featured Flutter Applications --><h4 class="text-3xl font-bold mb-8 text-center text-gray-800">Featured Flutter Applications</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-16">
+                    <!-- App Card 1: Your Quote App --><a href="https://play.google.com/store/apps/details?id=com.sarthicodes.quoteapp" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/3B82F6/ffffff?text=Quotes+App+Icon" 
+                             alt="Quote Application Icon" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/3B82F6/ffffff?text=Quotes+App+Placeholder';"
+                             class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Inspiration Daily</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">A clean, feature-rich app providing daily inspiration and categorized quotes from around the world.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 2: Example Utility App --><a href="https://play.google.com/store/apps/details?id=com.sarthicodes.utility" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/EF4444/ffffff?text=Utility+App+Icon" 
+                             alt="Utility Application Icon" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/EF4444/ffffff?text=Utility+App+Placeholder';"
+                             class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Time Tracker Pro</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Simple yet powerful time management and task tracking application for increased focus and productivity.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <!-- App Card 3: Example Education App --><a href="https://play.google.com/store/apps/details?id=com.sarthicodes.education" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/10B981/ffffff?text=Education+App+Icon" 
+                             alt="Education Application Icon" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/10B981/ffffff?text=Education+App+Placeholder';"
+                             class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Language Learner</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">An engaging educational platform utilizing flashcards and gamification to help users learn new languages quickly.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 4 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/22D3EE/ffffff?text=App+4+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Budget Buddy</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Track expenses, manage budgets, and achieve financial goals with this intuitive personal finance app.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 5 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/A78BFA/ffffff?text=App+5+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Recipe Rover</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Discover new recipes, save favorites, and plan meals with this culinary companion app.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <!-- App Card 6 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/FACC15/ffffff?text=App+6+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Fitness Journey</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Track workouts, monitor progress, and achieve your fitness goals with personalized routines.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 7 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/60A5FA/ffffff?text=App+7+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Study Companion</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Organize notes, set reminders, and improve study habits with this academic helper.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 8 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/FB7185/ffffff?text=App+8+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Mood Tracker</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Journal your feelings, track emotional patterns, and foster mental well-being with this mindful app.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 9 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/7C3AED/ffffff?text=App+9+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Habit Builder</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Cultivate positive habits and break bad ones with daily tracking, streaks, and motivational reminders.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- App Card 10 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/06B6D4/ffffff?text=App+10+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Event Planner Go</h5>
+                            <p class="text-sm text-gray-500 mb-3">Mobile App | Flutter</p>
+                            <p class="text-gray-600 line-clamp-2">Organize events, manage guest lists, and send invitations with ease for any occasion.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View on Play Store &rarr;
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Featured Software Solutions --><h4 class="text-3xl font-bold mb-8 text-center text-gray-800">Featured Software Solutions</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-16">
+                    <!-- Software Card 1 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/4F46E5/ffffff?text=Software+1+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Data Processor Pro</h5>
+                            <p class="text-sm text-gray-500 mb-3">Desktop Software | Python</p>
+                            <p class="text-gray-600 line-clamp-2">A powerful desktop application for automated data cleaning, transformation, and analysis.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                Learn More &rarr;
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <!-- Software Card 2 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/BEF264/ffffff?text=Software+2+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Inventory Manager Suite</h5>
+                            <p class="text-sm text-gray-500 mb-3">Desktop Software | Python</p>
+                            <p class="text-gray-600 line-clamp-2">Comprehensive inventory management system for small to medium businesses, built with a user-friendly interface.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                Learn More &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Software Card 3 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/F97316/ffffff?text=Software+3+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Secure File Encryptor</h5>
+                            <p class="text-sm text-gray-500 mb-3">Desktop Software | Python</p>
+                            <p class="text-gray-600 line-clamp-2">An essential tool for protecting sensitive data with robust encryption and decryption capabilities.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                Learn More &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Software Card 4 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/94A3B8/ffffff?text=Software+4+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Automated Report Generator</h5>
+                            <p class="text-sm text-gray-500 mb-3">Desktop Software | Python</p>
+                            <p class="text-gray-600 line-clamp-2">Generates custom reports from various data sources automatically, saving time and ensuring accuracy.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                Learn More &rarr;
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Featured Website Projects --><h4 class="text-3xl font-bold mb-8 text-center text-gray-800">Featured Website Projects</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Website Card 1 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/EC4899/ffffff?text=Website+1+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Local Bakery Website</h5>
+                            <p class="text-sm text-gray-500 mb-3">E-commerce Website</p>
+                            <p class="text-gray-600 line-clamp-2">A delightful online store for a local bakery, featuring online ordering and delivery.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View Website &rarr;
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <!-- Website Card 2 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/84CC16/ffffff?text=Website+2+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Startup Landing Page</h5>
+                            <p class="text-sm text-gray-500 mb-3">Marketing Website</p>
+                            <p class="text-gray-600 line-clamp-2">A sleek, conversion-focused landing page designed to attract investors and early adopters for a tech startup.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View Website &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Website Card 3 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/F59E0B/ffffff?text=Website+3+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Community Forum Platform</h5>
+                            <p class="text-sm text-gray-500 mb-3">Community Platform</p>
+                            <p class="text-gray-600 line-clamp-2">An interactive online forum fostering community engagement and discussions around various topics.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View Website &rarr;
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Website Card 4 --><a href="#" target="_blank" class="block bg-white rounded-xl overflow-hidden card-shadow">
+                        <img src="https://placehold.co/600x400/6366F1/ffffff?text=Website+4+Icon" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h5 class="text-xl font-semibold text-gray-900 mb-1">Blogging Platform</h5>
+                            <p class="text-sm text-gray-500 mb-3">Content Management</p>
+                            <p class="text-gray-600 line-clamp-2">A high-performance blogging platform designed for fast content delivery and strong SEO performance.</p>
+                            <span class="inline-block mt-3 text-blue-600 hover:text-blue-700 font-medium">
+                                View Website &rarr;
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-extrabold mb-4 text-gray-900">Get In Touch</h3>
+                    <p class="text-lg text-gray-600">We're always open to new projects and partnerships. Let's build something great.</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl border border-gray-200 shadow-xl">
+                    <div class="space-y-6">
+                        <!-- Contact Email -->
+                        <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Email Address</p>
+                                <a href="mailto:contact@sarthicodes.com" class="text-xl font-semibold text-gray-900 hover:text-blue-600 transition duration-150">contact@sarthicodes.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Contact Phone -->
+                        <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.75 4.45 8.5 3.25 8.5 2c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Phone Number</p>
+                                <a href="tel:+919876543210" class="text-xl font-semibold text-gray-900 hover:text-blue-600 transition duration-150">+91 987-654-3210</a>
+                                <p class="text-xs text-red-500 mt-1">(Placeholder - Please replace with your actual number)</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Address / Location -->
+                        <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Headquarters</p>
+                                <p class="text-xl font-semibold text-gray-900">Digital Workspace, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h4 class="text-2xl font-bold mb-4">SarthiCodes</h4>
+            <p class="mb-6 text-gray-400">Crafting code with passion, delivering excellence in every project.</p>
+            
+            <!-- Social/External Links -->
+            <div class="flex justify-center space-x-6 mb-6">
+                <!-- GitHub -->
+                <a href="https://github.com/SarthiCodes" target="_blank" class="text-gray-400 hover:text-blue-500 transition duration-150">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.409 2.862 8.125 6.821 9.467.499.09.679-.217.679-.481 0-.237-.01-1.017-.01-1.996-2.775.602-3.364-1.353-3.364-1.353-.455-1.152-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.002.071 1.531 1.032 1.531 1.032.892 1.529 2.341 1.085 2.91.828.092-.643.348-1.085.635-1.334-2.22-.251-4.555-1.113-4.555-4.951 0-1.096.39-1.988 1.03-2.697-.103-.252-.446-1.278.098-2.651 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.701.114 2.51.332 1.91-1.296 2.75-1.026 2.75-1.026.546 1.373.203 2.398.098 2.651.64.709 1.029 1.601 1.029 2.697 0 3.848-2.336 4.694-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.179.57.684.475C19.13 20.183 22 16.467 22 12.017 22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/company/SarthiCodes" target="_blank" class="text-gray-400 hover:text-blue-500 transition duration-150">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.529-4 0v5.604h-3v-11h3v1.765c1.397-2.618 7-2.756 7 2.288v6.947z"/></svg>
+                </a>
+                <!-- Email -->
+                <a href="mailto:contact@sarthicodes.com" class="text-gray-400 hover:text-blue-500 transition duration-150">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12.713l-11.75-8.79c.3-.186.634-.333 1-.433l10.75 8.05 10.75-8.05c.366.1.7.247 1 .433l-11.75 8.79zm11.75-7.713c-.366-.1-.7-.247-1-.433l-10.75 8.05-10.75-8.05c-.366.1-.7.247-1 .433v10.567c0 1.105.895 2 2 2h20c1.105 0 2-.895 2-2v-10.567z"/></svg>
+                </a>
+            </div>
+
+            <p class="text-sm text-gray-500 mt-8">© 2025 SarthiCodes. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
